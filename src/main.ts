@@ -1,25 +1,22 @@
+import accCreater from "./acccreater";
 import Config from "./config";
 
-class Greeting<T> {
+class Global<T> {
   private email: T;
   private password: T;
+  private ref: T;
 
-  constructor(email: T, password: T) {
+  constructor(email: T, password: T, ref: T) {
     this.email = email;
     this.password = password;
+    this.ref = ref;
   }
 
   createNewAccount(): any {
-    const accData = new Config();
-    accData.setYourLoginInfo({ email: this.email, password: this.password });
+    const accData = new accCreater();
+    accData.setYourLoginInfo({ email: this.email, password: this.password , ref : this.ref});
   }
 }
 
-//Shoud write here your account settings
-const _accData = {
-  email: "vladyk.doter@gmail.com",
-  password: "lolaomaf",
-};
-
-const greetClass = new Greeting<string>(_accData.email, _accData.password);
+const greetClass = new Global<string>(Config.email, Config.password , Config.ref);
 greetClass.createNewAccount();
