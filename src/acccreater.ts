@@ -4,7 +4,7 @@ const fetch = async (...args: any) => {
   );
 };
 
-export default class accCreater {
+export default class AccCreater {
   private email: string;
   private password: string;
   private ref: string;
@@ -40,9 +40,13 @@ export default class accCreater {
 
   async tryToSign() {
     try {
-      const fetchResponce = await fetch(
-        "https://jsonplaceholder.typicode.com/todos/5"
-      );
+      const fetchResponce = await fetch("https://reqres.in/api/users", {
+        method: "POST",
+        body: {
+          name: this.email,
+          job: this.password,
+        },
+      });
       const responce = await fetchResponce.json();
       console.log(responce);
     } catch (e) {
