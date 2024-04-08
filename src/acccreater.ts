@@ -1,3 +1,9 @@
+const fetch = async (...args: any) => {
+  return import("node-fetch").then(({ default: fetch }: { default: any }) =>
+    fetch(...args)
+  );
+};
+
 export default class accCreater {
   private email: string;
   private password: string;
@@ -20,6 +26,7 @@ export default class accCreater {
   }
 
   setYourRefLink(ref: string): void {
+    //any ref validate here
     this.ref = ref;
   }
 
@@ -27,6 +34,19 @@ export default class accCreater {
     this.setYourEmail(loginObject.email);
     this.setYourPassword(loginObject.password);
     this.setYourRefLink(loginObject.ref);
-    console.log(`${this.email} and ${this.password}, ref : ${this.ref}`);
+    // console.log(`${this.email} and ${this.password}, ref : ${this.ref}`);
+    this.tryToSign();
+  }
+
+  async tryToSign() {
+    try {
+      const fetchResponce = await fetch(
+        "https://jsonplaceholder.typicode.com/todos/5"
+      );
+      const responce = await fetchResponce.json();
+      console.log(responce);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
