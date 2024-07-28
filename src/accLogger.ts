@@ -4,7 +4,7 @@ const fetch = async (...args: any) => {
   );
 };
 
-export default class AccCreater {
+export default class accSingIn {
   private email: string;
   private password: string;
   private ref: string;
@@ -34,19 +34,26 @@ export default class AccCreater {
     this.setYourEmail(loginObject.email);
     this.setYourPassword(loginObject.password);
     this.setYourRefLink(loginObject.ref);
+    // this.tryToSign();
     // console.log(`${this.email} and ${this.password}, ref : ${this.ref}`);
-    this.tryToSign();
   }
 
   async tryToSign() {
     try {
-      const fetchResponce = await fetch("https://reqres.in/api/users", {
-        method: "POST",
-        body: {
-          name: this.email,
-          job: this.password,
-        },
-      });
+      const fetchResponce = await fetch(
+        "https://crop-monitoring.eos.com/service/auth/account/login/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            email: this.email,
+            password: this.password,
+            extra_data: {},
+          },
+        }
+      );
       const responce = await fetchResponce.json();
       console.log(responce);
     } catch (e) {

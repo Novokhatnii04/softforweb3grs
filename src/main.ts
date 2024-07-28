@@ -1,4 +1,4 @@
-import AccCreater from "./acccreater";
+import accSingIn from "./accLogger";
 import Config from "./config";
 
 class Global<T> {
@@ -13,7 +13,7 @@ class Global<T> {
   }
 
   createNewAccount(): any {
-    const accData = new AccCreater();
+    const accData = new accSingIn();
     accData.setYourLoginInfo({ email: this.email, password: this.password , ref : this.ref});
   }
 }
